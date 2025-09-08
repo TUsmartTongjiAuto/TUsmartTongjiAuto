@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TU-Smart 智能车队 - 同济大学 | 技术驱动未来</title>
+    <style>
+        :root {
+            --primary: #005a87;
+            --secondary: #e63946;
+            --light: #f1faee;
+            --dark: #1d3557;
+            --gray: #a8dadc;
+            --tech-blue: #457b9d;
+            --tech-green: #2a9d8f;
+            --tech-purple: #5e548e;
+            --tech-orange: #e76f51;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7));
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 2px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .tech-tag {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.3);
+            font-weight: 500;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+        
+        /* Technology Cards */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .tech-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .tech-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .tech-card-header {
+            padding: 1.5rem;
+            background: var(--primary);
+            color: white;
+            position: relative;
+        }
+        
+        .tech-card-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--secondary);
+        }
+        
+        .tech-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .tech-card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .tech-card-content p {
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+            font-size: 1rem;
+        }
+        
+        .tech-features {
+            list-style: none;
+        }
+        
+        .tech-features li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            border-bottom: 1px solid #eee;
+            font-size: 0.95rem;
+        }
+        
+        .tech-features li::before {
+            content: '●';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        
+        .tech-features li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Computer Vision Section */
+        .cv-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .cv-content h3 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .cv-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .cv-visual {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 2rem;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 2px dashed var(--primary);
+        }
+        
+        .cv-visual h4 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cv-diagram {
+            width: 100%;
+            height: 200px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            color: var(--dark);
+            font-weight: 600;
+            border: 1px solid #ddd;
+        }
+        
+        /* Algorithm Section */
+        .algorithm-showcase {
+            background: linear-gradient(135deg, var(--tech-blue), var(--tech-purple));
+            color: white;
+            border-radius: 15px;
+            padding: 3rem;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .algorithm-showcase::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+        
+        .algorithm-showcase::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+        
+        .algorithm-showcase h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+            font-weight: 700;
+        }
+        
+        .algorithm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .algorithm-item {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .algorithm-item:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-5px);
+        }
+        
+        .algorithm-item h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--light);
+            font-weight: 600;
+        }
+        
+        .algorithm-item p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        /* PCB Section */
+        .pcb-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+        
+        .pcb-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .pcb-item {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .pcb-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .pcb-item h4 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .pcb-diagram {
+            width: 100%;
+            height: 150px;
+            background: var(--light);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1rem 0;
+            font-size: 1rem;
+            color: var(--dark);
+            font-weight: 600;
+            border: 2px dashed var(--tech-blue);
+        }
+        
+        /* Awards Section */
+        .awards-showcase {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 3rem;
+        }
+        
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .award-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .award-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .award-item h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--gray);
+            padding-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .award-list {
+            list-style: none;
+        }
+        
+        .award-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+        
+        .award-list li::before {
+            content: '★';
+            color: var(--secondary);
+            font-weight: bold;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .cv-container,
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .tech-grid,
+            .awards-grid,
+            .pcb-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Code Snippet Style */
+        .code-snippet {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            line-height: 1.5;
+        }
+        
+        .code-keyword {
+            color: #f92672;
+        }
+        
+        .code-function {
+            color: #66d9ef;
+        }
+        
+        .code-comment {
+            color: #75715e;
+        }
+        
+        .code-string {
+            color: #a6e22e;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-text">TU-Smart</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#computer-vision">计算机视觉</a></li>
+                    <li><a href="#algorithms">控制算法</a></li>
+                    <li><a href="#pcb">PCB设计</a></li>
+                    <li><a href="#embedded">嵌入式系统</a></li>
+                    <li><a href="#awards">技术成果</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>智造未来，技术驱动</h1>
+            <p>同济大学TU-Smart智能车队，专注于智能车核心技术研发，涵盖计算机视觉、控制算法、PCB设计、嵌入式系统等前沿领域，用技术创新推动智能驾驶发展。</p>
+            
+            <div class="tech-tags">
+                <div class="tech-tag">图像识别</div>
+                <div class="tech-tag">PID控制</div>
+                <div class="tech-tag">SLAM算法</div>
+                <div class="tech-tag">PCB设计</div>
+                <div class="tech-tag">嵌入式开发</div>
+                <div class="tech-tag">神经网络</div>
+                <div class="tech-tag">逆透视变换</div>
+                <div class="tech-tag">无线充电</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Computer Vision Section -->
+    <section id="computer-vision">
+        <div class="container">
+            <div class="section-title">
+                <h2>计算机视觉技术</h2>
+            </div>
+            <div class="cv-container">
+                <div class="cv-content">
+                    <h3>图像处理与识别</h3>
+                    <p>我们深入研究计算机视觉在智能车领域的应用，开发了多种高效的图像处理算法，实现精准的环境感知和决策控制。</p>
+                    <ul class="tech-features">
+                        <li>车道线检测与跟踪</li>
+                        <li>交通标志识别</li>
+                        <li>目标检测与避障</li>
+                        <li>逆透视变换(IPM)</li>
+                        <li>图像去畸变处理</li>
+                        <li>多传感器融合</li>
+                        <li>实时图像处理优化</li>
+                    </ul>
+                    <p>通过深度学习和传统图像处理算法的结合，我们的系统能够在复杂环境中准确识别道路特征，为智能车提供可靠的导航信息。</p>
+                    
+                    <div class="code-snippet">
+                        <span class="code-comment">// 车道线检测算法示例</span><br>
+                        <span class="code-keyword">def</span> <span class="code-function">detect_lane_lines</span>(image):<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment"># 图像预处理</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;blur = cv2.GaussianBlur(gray, (5, 5), 0)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;edges = cv2.Canny(blur, 50, 150)<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment"># 霍夫变换检测直线</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;lines = cv2.HoughLinesP(edges, 1, np.pi/180, 50, minLineLength=100, maxLineGap=50)<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> process_lines(lines)
+                    </div>
+                </div>
+                <div class="cv-visual">
+                    <h4>计算机视觉处理流程</h4>
+                    <div class="cv-diagram">
+                        图像采集 → 预处理 → 特征提取 → 目标识别 → 决策输出
+                    </div>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--dark);">
+                        从原始图像到控制指令的完整处理链路
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Algorithms Section -->
+    <section id="algorithms" style="background-color: #f0f5f9;">
+        <div class="container">
+            <div class="section-title">
+                <h2>核心控制算法</h2>
+            </div>
+            
+            <div class="algorithm-showcase">
+                <h3>智能控制算法体系</h3>
+                <div class="algorithm-grid">
+                    <div class="algorithm-item">
+                        <h4>PID控制算法</h4>
+                        <p>实现精准的速度和方向控制，通过参数自整定优化系统响应，确保车辆稳定运行在各种赛道条件下。</p>
+                        <div class="code-snippet" style="background: rgba(0,0,0,0.2); color: white; font-size: 0.8rem;">
+                            error = target - current;<br>
+                            integral += error * dt;<br>
+                            derivative = (error - prev_error) / dt;<br>
+                            output = Kp*error + Ki*integral + Kd*derivative;
+                        </div>
+                    </div>
+                    <div class="algorithm-item">
+                        <h4>模糊控制</h4>
+                        <p>处理不确定性和非线性系统，提高车辆在复杂环境中的适应能力，实现更智能的决策控制。</p>
+                    </div>
+                    <div class="algorithm-item">
+                        <h4>卡尔曼滤波</h4>
+                        <p>多传感器数据融合，消除噪声干扰，提供更准确的状态估计，提升系统鲁棒性和可靠性。</p>
+                    </div>
+                    <div class="algorithm-item">
+                        <h4>路径规划</h4>
+                        <p>基于A*、Dijkstra等算法实现最优路径规划，结合实时环境信息动态调整行驶路线。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-card-header">
+                        <h3>传感器融合</h3>
+                    </div>
+                    <div class="tech-card-content">
+                        <p>整合多种传感器数据，构建完整的环境感知系统，提高智能车的环境适应能力。</p>
+                        <ul class="tech-features">
+                            <li>摄像头数据处理</li>
+                            <li>IMU姿态解算</li>
+                            <li>超声波避障</li>
+                            <li>电磁传感器</li>
+                            <li>激光雷达点云</li>
+                            <li>多源数据同步</li>
+                        </ul>
+                        <div class="code-snippet">
+                            <span class="code-comment">// 传感器数据融合</span><br>
+                            fused_data = kalman_filter(<br>
+                            &nbsp;&nbsp;camera_data, imu_data, lidar_data<br>
+                            );
+                        </div>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-card-header">
+                        <h3>机器学习应用</h3>
+                    </div>
+                    <div class="tech-card-content">
+                        <p>将机器学习算法应用于智能车控制，实现更智能、更自适应的驾驶行为。</p>
+                        <ul class="tech-features">
+                            <li>神经网络控制</li>
+                            <li>强化学习调参</li>
+                            <li>特征提取优化</li>
+                            <li>模型压缩部署</li>
+                            <li>实时推理优化</li>
+                            <li>数据增强技术</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-card-header">
+                        <h3>实时系统优化</h3>
+                    </div>
+                    <div class="tech-card-content">
+                        <p>针对嵌入式平台进行算法优化，确保系统实时性和稳定性，满足竞赛要求。</p>
+                        <ul class="tech-features">
+                            <li>算法复杂度优化</li>
+                            <li>内存管理优化</li>
+                            <li>多线程调度</li>
+                            <li>中断处理优化</li>
+                            <li>实时性保障</li>
+                            <li>性能监控系统</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PCB Section -->
+    <section id="pcb">
+        <div class="container">
+            <div class="section-title">
+                <h2>PCB电路设计</h2>
+            </div>
+            
+            <div class="cv-container">
+                <div class="cv-visual">
+                    <h4>PCB设计架构</h4>
+                    <div class="cv-diagram">
+                        电源管理 → 主控MCU → 传感器接口 → 电机驱动 → 通信模块
+                    </div>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--dark);">
+                        模块化电路设计架构
+                    </p>
+                </div>
+                <div class="cv-content">
+                    <h3>专业电路设计</h3>
+                    <p>我们自主设计开发智能车专用电路板，从原理图设计到PCB布局，从元件选型到焊接调试，全流程掌握硬件开发技术。</p>
+                    <ul class="tech-features">
+                        <li>Altium Designer专业设计</li>
+                        <li>高速信号完整性分析</li>
+                        <li>电源管理系统设计</li>
+                        <li>EMC/EMI防护设计</li>
+                        <li>无线充电系统</li>
+                        <li>传感器接口电路</li>
+                        <li>电机驱动电路</li>
+                    </ul>
+                    <p>通过严谨的电路设计和测试验证，确保硬件系统的稳定性和可靠性，为智能车提供坚实的硬件基础。</p>
+                </div>
+            </div>
+            
+            <div class="pcb-showcase">
+                <h3 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">PCB设计模块</h3>
+                <div class="pcb-grid">
+                    <div class="pcb-item">
+                        <h4>主控板</h4>
+                        <div class="pcb-diagram">
+                            STM32 + 外围电路
+                        </div>
+                        <p>基于STM32系列MCU，集成各种外设接口，实现核心控制功能。</p>
+                    </div>
+                    <div class="pcb-item">
+                        <h4>电机驱动板</h4>
+                        <div class="pcb-diagram">
+                            H桥驱动电路
+                        </div>
+                        <p>采用H桥驱动电路，实现电机的精确控制和双向驱动。</p>
+                    </div>
+                    <div class="pcb-item">
+                        <h4>传感器接口板</h4>
+                        <div class="pcb-diagram">
+                            多传感器集成
+                        </div>
+                        <p>集成摄像头、IMU、超声波等多种传感器接口，提供丰富的环境感知能力。</p>
+                    </div>
+                    <div class="pcb-item">
+                        <h4>电源管理板</h4>
+                        <div class="pcb-diagram">
+                            多路稳压输出
+                        </div>
+                        <p>提供多路不同电压输出，满足各模块的供电需求，确保系统稳定运行。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Embedded Systems Section -->
+    <section id="embedded" style="background-color: #f0f5f9;">
+        <div class="container">
+            <div class="section-title">
+                <h2>嵌入式系统开发</h2>
+            </div>
+            
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-card-header">
+                        <h3>MCU开发</h3>
+                    </div>
+                    <div class="tech-card-content">
+                        <p>基于多种微控制器平台进行嵌入式开发，充分发挥硬件性能，实现高效稳定的控制系统。</p>
+                        <ul class="tech-features">
+                            <li>STM32系列开发</li>
+                            <li>RTOS实时操作系统</li>
+                            <li>外设驱动开发</li>
+                            <li>Bootloader设计</li>
+                            <li>固件升级系统</li>
+                            <li>低功耗优化</li>
+                            <li>硬件抽象层设计</li>
+                        </ul>
+                        <div class="code-snippet">
+                            <span class="code-comment">// STM32 GPIO初始化</span><br>
+                            GPIO_InitTypeDef GPIO_InitStruct;<br>
+                            <span class="code-keyword">void</span> MX_GPIO_Init(<span class="code-keyword">void</span>)<br>
+                            {<br>
+                            &nbsp;&nbsp;GPIO_InitStruct.Pin = GPIO_PIN_5;<br>
+                            &nbsp;&nbsp;GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;<br>
+                            &nbsp;&nbsp;HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);<br>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-card-header">
+                        <h3>通信协议</h3>
+                    </div>
+                    <div class="tech-card-content">
+                        <p>实现多种通信协议，确保系统各模块间高效可靠的数据传输。</p>
+                        <ul class="tech-features">
+                            <li>CAN总线通信</li>
+                            <li>UART串口通信</li>
+                            <li>SPI/I2C协议</li>
+                            <li>无线通信模块</li>
+                            <li>自定义通信协议</li>
+                            <li>数据校验机制</li>
+                            <li>通信故障处理</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-card-header">
+                        <h3>系统架构</h3>
+                    </div>
+                    <div class="tech-card-content">
+                        <p>设计模块化、可扩展的系统架构，提高代码复用性和维护性。</p>
+                        <ul class="tech-features">
+                            <li>分层架构设计</li>
+                            <li>模块化编程</li>
+                            <li>状态机设计</li>
+                            <li>事件驱动架构</li>
+                            <li>配置管理系统</li>
+                            <li>日志记录系统</li>
+                            <li>调试接口设计</li>
+                        </ul>
+                        <div class="code-snippet">
+                            <span class="code-comment">// 状态机实现</span><br>
+                            <span class="code-keyword">switch</span>(current_state) {<br>
+                            &nbsp;&nbsp;<span class="code-keyword">case</span> IDLE:<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">if</span>(start_condition) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current_state = RUNNING;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;<span class="code-keyword">break</span>;<br>
+                            &nbsp;&nbsp;<span class="code-keyword">case</span> RUNNING:<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">// 执行运行逻辑</span><br>
+                            &nbsp;&nbsp;<span class="code-keyword">break</span>;<br>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section id="awards">
+        <div class="container">
+            <div class="section-title">
+                <h2>技术成果与荣誉</h2>
+            </div>
+            
+            <div class="awards-showcase">
+                <div class="awards-grid">
+                    <div class="award-item">
+                        <h3>全国大学生智能汽车竞赛</h3>
+                        <ul class="award-list">
+                            <li>2024年完全模型组全国一等奖</li>
+                            <li>2023年室外越野组全国一等奖</li>
+                            <li>2019年创意组全国一等奖</li>
+                            <li>2016年创意组全国一等奖</li>
+                            <li>2013年创意组全国总决赛一等奖</li>
+                            <li>2011年创意组全国总决赛一等奖</li>
+                        </ul>
+                    </div>
+                    <div class="award-item">
+                        <h3>Carolo-Cup国际赛事</h3>
+                        <ul class="award-list">
+                            <li>2019年动态赛第三名</li>
+                            <li>2019年静态赛第三名</li>
+                            <li>2019年总成绩第三名</li>
+                            <li>2018年首次参赛总成绩第四名</li>
+                        </ul>
+                    </div>
+                    <div class="award-item">
+                        <h3>技术创新成果</h3>
+                        <ul class="award-list">
+                            <li>自适应PID控制算法</li>
+                            <li>多传感器融合系统</li>
+                            <li>实时图像处理框架</li>
+                            <li>无线充电解决方案</li>
+                            <li>智能路径规划算法</li>
+                            <li>嵌入式AI推理引擎</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">
+                <div class="logo-text">TU-Smart 智能车队</div>
+            </div>
+            <div class="footer-links">
+                <a href="#computer-vision">计算机视觉</a>
+                <a href="#algorithms">控制算法</a>
+                <a href="#pcb">PCB设计</a>
+                <a href="#embedded">嵌入式系统</a>
+                <a href="#awards">技术成果</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 同济大学TU-Smart智能车队. 智造未来，无所不能。</p>
+                <p>技术驱动创新 · 代码改变世界</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // 滚动动画
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            function checkFade() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.classList.add('appear');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', checkFade);
+            checkFade(); // 初始检查
+            
+            // 添加浮动动画到技术标签
+            const techTags = document.querySelectorAll('.tech-tag');
+            techTags.forEach((tag, index) => {
+                setTimeout(() => {
+                    tag.classList.add('floating');
+                }, index * 200);
+            });
+            
+            // 卡片悬停效果增强
+            const techCards = document.querySelectorAll('.tech-card');
+            techCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // PCB项目悬停效果
+            const pcbItems = document.querySelectorAll('.pcb-item');
+            pcbItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
